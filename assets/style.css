@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;  
+}
+
+header {
+    text-align: center;
+    height: 100px;
+    background-image: linear-gradient(45deg, #2BD2FF  42%, #2BFF88 90%);
+}
+
+
+.main-weather {
+    text-align: center;
+    border: 2px solid black;
+    height: 250px;
+    margin: 25px;
+    padding: 25px
+}
+
+
+.main-page {
+    border: 2px black solid;
+    height: 700px;
+    margin-top: 25px;
+}
+.search {
+    border: 2px solid black;
+    margin: 25px;
+    padding: 25px;
+}
+
+.weather-stats{
+    border: 2px solid black;
+}
+
+.input {
+    width: 100%;
+}
+
+.input-button {
+    margin-top: 10px;
+    background-image: linear-gradient(45deg, #2BD2FF  42%, #2BFF88 90%);
+}
