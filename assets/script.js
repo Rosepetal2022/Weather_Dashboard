@@ -12,10 +12,6 @@ let getLatLon = (city) => {
         return response.json()
     })
    .then(data => {
-        //let lat = data.city.coord.lat
-        //let lon = data.city.coord.lon
-        //console.log(lat, lon)
-    
         getCurrentWeather(data);
     })
 }
@@ -23,9 +19,9 @@ let getLatLon = (city) => {
 
 
 //current weather api call 
-let getCurrentWeather = (response) => {
-    let cityLat = response.city.coord.lat
-    let cityLon = response.city.coord.lon
+let getCurrentWeather = (data) => {
+    let cityLat = data.city.coord.lat
+    let cityLon = data.city.coord.lon
   
     
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLon}&appid=35364985ed49d890b2571e2cb173bbb0`)
@@ -38,11 +34,19 @@ let getCurrentWeather = (response) => {
 })
     .then(data => {
         console.log(data)
+        //create El li's that list the weather data we want to display 
+        mainWeather.innerHTML = data.name 
+        
+        
+
+        
+        
+        //data.weather[0].main
+
     })
     .catch((error) => console.error("Fetch Error" , error))
 
-    mainWeather.innerHTML = response.city.name 
-    + response.city.timezone
+   
     
     
     console.log(mainWeather)
