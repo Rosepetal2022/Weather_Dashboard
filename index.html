@@ -15,37 +15,56 @@
     <h1>Weather Dashboard</h1>
 </header>
 
+
+
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="main-page col-2">
-                Search for a city:
-                <form id = "search-form">
+                <h3 class="title">Search for a city:</h3>
+                <form id="search-form">
                     <label class="city-search">
                         <input type="text" class="input">
-                        <button type="submit" id = "input-button" class="input-button">Search</button>
+                        <button type="submit" id="input-button" class="input-button">Search</button>
+                        
                     </label>
                 </form>
-            </div>
-            <div class="main-weather col-8">
-                Weather Stats:
-                <ul class="weather-stats">
-                    <li class="temp"></li>
-                    <li class= "wind-speed"></li>
-                    <li class= "humidity"></li>
-                    <li></li>
+                <div id="history">
                     
-                </ul>
-              
+                </div>
             </div>
-           
-        </div>
-        
+            <div class="col-10">
+                <div class="row">
+                    <div class="main-weather col-sm">
+                        <h4 id="city-name">Weather Stats</h4>
+                        <h3 id="date-time"></h3>
+                        <div class="weather-stats">
+                            <div class="icon"></div>
+                            <div class="description"></div>
+                            <div class="temp"></div>
+                            <div class="wind-speed"></div>
+                            <div class="humidity"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm" id="five-day">
+                        <div class="d-flex justify-content-end five-day-container">
 
-    </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
 </body>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="./assets/script.js"></script>
 
 </html>
