@@ -140,18 +140,15 @@ inputButton.classList.add('card', 'bg-primary', 'text-white', 'rounded', 'mr-2',
 let setCity = () => {
     let cityArr =[];
 
-cityArr.push(userInput.value)
-localStorage.setItem('cityArr', JSON.stringify(cityArr));
+    cityArr.push(userInput.value)
+    localStorage.setItem('cityArr', JSON.stringify(cityArr));
 
 
-let searchHistory = document.querySelector('#history')
-console.log(searchHistory)
+    let searchHistory = document.querySelector('#history')
+
 
 for(i=0; i < cityArr.length; i++) {
-
     const cityName = cityArr[i] 
-
-
     let historyEl = document.createElement('p')
     historyEl.textContent = cityName
     historyEl.classList.add('card', 'bg-primary', 'text-white', 'rounded', 'mr-2', 'flex-fill')
