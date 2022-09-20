@@ -4,7 +4,29 @@ let searchForm = document.querySelector("#search-form");
 let cityName = document.querySelector('#city-name');
 let weatherStats = document.querySelector('.weather-stats');
 let city = userInput.value
+let cityArr = localStorage.getItem('cityArr')===null? []:JSON.parse(localStorage.getItem('cityArr'))
 
+//design for the input button
+let inputButton = document.querySelector('#input-button');
+inputButton.classList.add('button', 'btn-primary', 'rounded')
+
+//design for clear search history button
+let clearSearch = document.querySelector('#clear-search');
+clearSearch.classList.add('button', 'btn-primary', 'rounded')
+
+let searchHistory = document.querySelector('#history')
+
+
+
+for(i=0; i < cityArr.length; i++) {
+    const cityName = cityArr[i] 
+    let historyEl = document.createElement('p')
+    historyEl.textContent = cityName
+    historyEl.classList.add('buttonEl', 'btn-primary', 'rounded', 'btn-lg')
+
+    searchHistory.appendChild(historyEl)
+   
+};
 
 
 
@@ -39,13 +61,6 @@ let getCurrentWeather = (data) => {
         console.log(data)
         cityName.textContent = data.name
 
-        //let search = document.querySelector('.search-history')
-        
-        //let searchHistory = JSON.parse(localStorage.getItem('city'));
-        
-        //cityArr.push(searchHistory);
-
-
         //Populate the data to the li in the index.HTML
         let dateTime = document.querySelector('#date-time')
         dateTime.setAttribute('class', 'date-time')
@@ -65,9 +80,11 @@ let getCurrentWeather = (data) => {
 
 
         let icon = document.querySelector('.icon')
+        icon.innerHTML = '';
         let weatherIcon = document.createElement('img')
         weatherIcon.setAttribute('src', "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
         icon.appendChild(weatherIcon)
+        
 
 
         fiveDayForecast(cityLat, cityLon);
@@ -90,8 +107,10 @@ let fiveDayForecast = (cityLat, cityLon) => {
      .then(data => {
          console.log(data)
 
-         let card = document.querySelector('.five-day-container')
-    
+         let card = document.querySelector('.five-day-container');
+         card.innerHTML = '';
+          
+        
          for(i=0;i<5;i++) {
             let cardInfo = document.createElement('div')
             cardInfo.classList.add('card', 'bg-primary', 'text-white', 'rounded', 'mr-2', 'flex-fill');
@@ -132,45 +151,53 @@ let fiveDayForecast = (cityLat, cityLon) => {
 }
 
 
-//design for the input button
-let inputButton = document.querySelector('#input-button');
-inputButton.classList.add('card', 'bg-primary', 'text-white', 'rounded', 'mr-2', 'flex-fill')
+
 
 //function for setting and getting local storage
 let setCity = () => {
-    let cityArr =[];
+    if(cityArr.indexOf(userInput.value.toUpperCase()) == -1) {
+        cityArr.push(userInput.value.toUpperCase())
+        let historyEl = document.createElement('p')
+        historyEl.textContent = userInput.value.toUpperCase()
+        historyEl.classList.add('buttonEl', "btn-primary", 'rounded')
+        searchHistory.appendChild(historyEl)
+        console.log(historyEl)
+    }
 
-    cityArr.push(userInput.value)
+    
+
+    if(cityArr.length > 5) {
+        cityArr.shift();
+    }
     localStorage.setItem('cityArr', JSON.stringify(cityArr));
-
-
-    let searchHistory = document.querySelector('#history')
-
-
-for(i=0; i < cityArr.length; i++) {
-    const cityName = cityArr[i] 
-    let historyEl = document.createElement('p')
-    historyEl.textContent = cityName
-    historyEl.classList.add('card', 'bg-primary', 'text-white', 'rounded', 'mr-2', 'flex-fill')
-
-
-    searchHistory.appendChild(historyEl)
-
-    console.log(cityName)
 };
-
-};
-
-
 
 //function to handle the click event
 clickEventHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     let city = userInput.value.trim();
     getLatLon(city);
     setCity(city);
 };
 
+searchHistoryHandler = (e) => {
+    console.log("button was clicked")
+    let city = e.target.innerHTML
+    getLatLon(city)
+}
+
+clearSearchHandler = (e)  => {
+    cityArr = [];
+    searchHistory.innerHTML = '';
+    localStorage.clear();
+}
+
+
 
 //event listeners for user input
 searchForm.addEventListener('submit', clickEventHandler);
+
+searchHistory.addEventListener('click', searchHistoryHandler);
+
+clearSearch.addEventListener('click', clearSearchHandler)
+

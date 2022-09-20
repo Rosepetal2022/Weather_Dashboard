@@ -5,7 +5,7 @@
 header {
     text-align: center;
     height: 100px;
-    background-image: linear-gradient(45deg, #2BD2FF  42%, #2BFF88 90%);
+
 }
 
 .text-center {
@@ -21,11 +21,21 @@ header {
     padding: 25px
 }
 
+#clear-search {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 120px;
+}
+
+#input-button {
+    width: 120px;
+}
 
 
 .main-page {
     background-color: grey;
     padding-top: 25px;
+    margin-top: none;
     color: white;
     text-align: center;
     height: 700px;
@@ -43,13 +53,6 @@ header {
 .title {
     font-size: 24px;
 }
-
-/*.input-button{
-    margin-top: 10px;
-    width: 80%;
-    border-radius: 10px;
-    background-image: linear-gradient(45deg, #2BD2FF  42%, #2BFF88 90%);
-}*/
 
 .date-time {
     font-size: 14px;
