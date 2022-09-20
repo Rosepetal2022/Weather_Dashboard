@@ -20,4 +20,4 @@ HTML
 JavaScript
 
 ## Screen Shot
-![This is an image](assets/weatherDashboard.png)
+![This is an image](/assets/weather-dashboard.png)

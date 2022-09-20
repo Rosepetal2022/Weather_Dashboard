@@ -1,4 +1,3 @@
-
 let userInput = document.querySelector(".input");
 let searchForm = document.querySelector("#search-form");
 let cityName = document.querySelector('#city-name');
@@ -17,7 +16,7 @@ clearSearch.classList.add('button', 'btn-primary', 'rounded')
 let searchHistory = document.querySelector('#history')
 
 
-
+//for loop to iterate over anything in local storage and add it to the page
 for(i=0; i < cityArr.length; i++) {
     const cityName = cityArr[i] 
     let historyEl = document.createElement('p')
@@ -60,6 +59,7 @@ let getCurrentWeather = (data) => {
     .then(data => {
         console.log(data)
         cityName.textContent = data.name
+        cityName.classList.add('h1', 'strong',)
 
         //Populate the data to the li in the index.HTML
         let dateTime = document.querySelector('#date-time')
@@ -117,16 +117,19 @@ let fiveDayForecast = (cityLat, cityLon) => {
 
            
             let iconEl = document.createElement('img')
+            iconEl.classList.add('w-50')
             let fiveDayDate = document.createElement('p')
+            fiveDayDate.classList.add('h4', 'strong')
             let tempEl = document.createElement('p')
             let humidityEl = document.createElement('p')
             let windEl = document.createElement('p')
             
             
             let startDate = moment().add(1, 'day').add(i, 'day').format('MMM Do YYYY')
+            
             let cardTemp = (data.list[i].main.temp + ' degrees')
-            let cardHumidity = ('humidity ' + data.list[i].main.humidity + ' %')
-            let cardWind = ('wind ' + data.list[i].wind.speed + ' mph')
+            let cardHumidity = (data.list[i].main.humidity + ' % humidity')
+            let cardWind = (data.list[i].wind.speed + ' mph wind speed')
             
             iconEl.setAttribute('src', "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
             
@@ -159,7 +162,7 @@ let setCity = () => {
         cityArr.push(userInput.value.toUpperCase())
         let historyEl = document.createElement('p')
         historyEl.textContent = userInput.value.toUpperCase()
-        historyEl.classList.add('buttonEl', "btn-primary", 'rounded')
+        historyEl.classList.add('buttonEl', "btn-primary", 'rounded', 'btn-lg')
         searchHistory.appendChild(historyEl)
         console.log(historyEl)
     }
@@ -172,32 +175,32 @@ let setCity = () => {
     localStorage.setItem('cityArr', JSON.stringify(cityArr));
 };
 
-//function to handle the click event
+//function to handle the search click event
 clickEventHandler = (e) => {
     e.preventDefault(); 
     let city = userInput.value.trim();
-    getLatLon(city);
-    setCity(city);
-};
+        getLatLon(city);
+        setCity(city);
+}
 
+//function to handle click event for searching a previous city 
 searchHistoryHandler = (e) => {
-    console.log("button was clicked")
     let city = e.target.innerHTML
     getLatLon(city)
 }
 
+//function to handle click event for clearing local storage and search history
 clearSearchHandler = (e)  => {
     cityArr = [];
     searchHistory.innerHTML = '';
     localStorage.clear();
 }
 
-
-
 //event listeners for user input
 searchForm.addEventListener('submit', clickEventHandler);
 
+//event listener for previous searched cities
 searchHistory.addEventListener('click', searchHistoryHandler);
 
-clearSearch.addEventListener('click', clearSearchHandler)
-
+//event listener for clearing local storage
+clearSearch.addEventListener('click', clearSearchHandler);
