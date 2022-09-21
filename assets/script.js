@@ -82,7 +82,7 @@ let getCurrentWeather = (data) => {
         let icon = document.querySelector('.icon')
         icon.innerHTML = '';
         let weatherIcon = document.createElement('img')
-        weatherIcon.setAttribute('src', "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
+        weatherIcon.setAttribute('src', "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
         icon.appendChild(weatherIcon)
         
 
