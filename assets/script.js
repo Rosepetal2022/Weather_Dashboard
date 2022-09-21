@@ -31,7 +31,7 @@ for(i=0; i < cityArr.length; i++) {
 
 //get Lat and Lon for the current weather api call
 let getLatLon = (city) => {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=35364985ed49d890b2571e2cb173bbb0`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=35364985ed49d890b2571e2cb173bbb0`)
     .then(response => {
         return response.json()
     })
